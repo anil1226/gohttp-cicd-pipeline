@@ -7,5 +7,8 @@ COPY ./go.mod /
 RUN CGO_ENABLED=0 GOOS=linux go build -o app main.go
 
 FROM alpine:latest AS producuction
+RUN addgroup -S nonroot \
+    && adduser -S nonroot -G nonroot
 COPY --from=builder /app .
+USER nonroot
 CMD [ "./app" ]
