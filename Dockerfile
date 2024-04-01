@@ -11,4 +11,5 @@ RUN addgroup -S nonroot \
     && adduser -S nonroot -G nonroot
 COPY --from=builder /app .
 USER nonroot
+EXPOSE 8080
 CMD [ "./app" ]
